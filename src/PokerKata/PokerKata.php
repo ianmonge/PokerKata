@@ -26,7 +26,7 @@ class PokerKata implements PokerKataInterface
     private function sortCards(array $cards)
     {
         $sortFunction = function(Card $a, Card $b) {
-            return $a->getNumber() > $a->getNumber() ? 1 : -1;
+            return $a->getNumber() > $b->getNumber() ? 1 : -1;
         };
 
         usort($cards, $sortFunction);
@@ -39,10 +39,57 @@ class PokerKata implements PokerKataInterface
      */
     private function findWinnerCombination(array $cards)
     {
-        if ($this->isCombinationPair($cards)) {
+        if ($this->isCombinationThreeOfAKind($cards)) {
+            return CardSetCombination::COMB_THREE_OF_A_KIND;
+        } elseif ($this->isCombinationTwoPair($cards)) {
+            return CardSetCombination::COMB_TWO_PAIR;
+        } elseif ($this->isCombinationPair($cards)) {
             return CardSetCombination::COMB_PAIR;
         }
         return CardSetCombination::COMB_HIGH_CARD;
+    }
+
+    /**
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isCombinationThreeOfAKind(array $cards)
+    {
+        $firstPairPositions = $this->findCardPair($cards);
+
+        if (empty($firstPairPositions)) {
+            return false;
+        }
+
+        $lastCardOfPair             = $cards[$firstPairPositions[1]];
+        $nextCardTolastCardOfPair   = $cards[$firstPairPositions[1]+1];
+
+        if ($lastCardOfPair->getNumber() === $nextCardTolastCardOfPair->getNumber()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isCombinationTwoPair(array $cards)
+    {
+        $firstPairPositions = $this->findCardPair($cards);
+
+        if (empty($firstPairPositions)) {
+            return false;
+        }
+
+        $lastCardOfFirstPair = $firstPairPositions[1];
+
+        $cards = array_slice($cards, $lastCardOfFirstPair+1);
+
+        return $this->isCombinationPair($cards);
     }
 
     /**
@@ -70,7 +117,7 @@ class PokerKata implements PokerKataInterface
 
         foreach ($cards as $key => $card) {
             if ($previousNumber === $card->getNumber()) {
-                return array($key-1, $key);
+                return array($key, $key+1);
             }
 
             $previousNumber = $card->getNumber();

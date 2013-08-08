@@ -60,22 +60,42 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
             'High card' => array(
                 array(
                     new Card(Card::SUIT_CLUB, 1),
-                    new Card(Card::SUIT_DIAMONTS, 3),
+                    new Card(Card::SUIT_HEARTS, Card::NUM_KING),
                     new Card(Card::SUIT_HEARTS, 5),
                     new Card(Card::SUIT_SPADE, 8),
-                    new Card(Card::SUIT_HEARTS, Card::NUM_KING),
+                    new Card(Card::SUIT_DIAMONTS, 3),
                 ),
                 CardSetCombination::COMB_HIGH_CARD,
             ),
             'Pair' => array(
                 array(
+                    new Card(Card::SUIT_HEARTS, 3),
                     new Card(Card::SUIT_CLUB, 1),
                     new Card(Card::SUIT_DIAMONTS, 3),
-                    new Card(Card::SUIT_HEARTS, 3),
                     new Card(Card::SUIT_SPADE, 8),
                     new Card(Card::SUIT_HEARTS, Card::NUM_KING),
                 ),
                 CardSetCombination::COMB_PAIR,
+            ),
+            'Two pair' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_CLUB, 1),
+                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                    new Card(Card::SUIT_SPADE, 8),
+                ),
+                CardSetCombination::COMB_TWO_PAIR,
+            ),
+            'Three of a king' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_CLUB, 1),
+                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                    new Card(Card::SUIT_HEARTS, 1),
+                ),
+                CardSetCombination::COMB_THREE_OF_A_KIND,
             ),
         );
     }
