@@ -39,7 +39,9 @@ class PokerKata implements PokerKataInterface
      */
     private function findWinnerCombination(array $cards)
     {
-        if ($this->isCombinationStraight($cards)) {
+        if ($this->isCombinationFlush($cards)) {
+            return CardSetCombination::COMB_FLUSH;
+        } elseif ($this->isCombinationStraight($cards)) {
             return CardSetCombination::COMB_STRAIGHT;
         } elseif ($this->isCombinationThreeOfAKind($cards)) {
             return CardSetCombination::COMB_THREE_OF_A_KIND;
@@ -56,6 +58,27 @@ class PokerKata implements PokerKataInterface
      *
      * @return bool
      */
+    private function isCombinationFlush(array $cards)
+    {
+        $previousSuit = current($cards)->getSuit();
+        array_shift($cards);
+
+        foreach ($cards as $card) {
+            if ($previousSuit !== $card->getSuit()) {
+                return false;
+            }
+
+            $previousSuit = $card->getSuit();
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $cards
+     *
+     * @return bool
+     */
     private function isCombinationStraight(array $cards)
     {
         if (current($cards)->getNumber() === 1
@@ -65,7 +88,6 @@ class PokerKata implements PokerKataInterface
             $newAceCard = new Card($aceCard->getSuit(), 14);
             array_push($cards, $newAceCard);
         }
-
 
         $previousNumber = current($cards)->getNumber();
         array_shift($cards);
@@ -138,6 +160,7 @@ class PokerKata implements PokerKataInterface
 
     /**
      * Find a card pair. If it find them, it return their positions. If not, it returns an empty array.
+     *
      * @param array $cards
      *
      * @return array
