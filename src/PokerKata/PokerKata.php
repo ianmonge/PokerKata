@@ -14,7 +14,7 @@ class PokerKata implements PokerKataInterface
      */
     public function getWinnerCombination(CardSet $cardSet)
     {
-        $cards = $cardSet->getCards();
+        $cards = $cardSet->getArrayCopy();
 
         $sortedCards = $this->sortCards($cards);
 
