@@ -42,8 +42,8 @@ class Card
      */
     public function __construct($suit, $number)
     {
-        $this->setNumber($number);
-        $this->setSuit($suit);
+        $this->number = $number;
+        $this->suit   = $suit;
     }
 
     /**
@@ -60,21 +60,5 @@ class Card
     public function getSuit()
     {
         return $this->suit;
-    }
-
-    /**
-     * @param int $number
-     */
-    private function setNumber($number)
-    {
-        $this->number = $number;
-    }
-
-    /**
-     * @param int $suit
-     */
-    private function setSuit($suit)
-    {
-        $this->suit = $suit;
     }
 }
