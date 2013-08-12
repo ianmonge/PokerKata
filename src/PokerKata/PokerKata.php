@@ -110,14 +110,14 @@ class PokerKata implements PokerKataInterface
      */
     private function isCombinationThreeOfAKind(array $cards)
     {
-        $firstPairPositions = $this->findCardPair($cards);
+        $firstPairPosition = $this->findCardPair($cards);
 
-        if (empty($firstPairPositions)) {
+        if (null === $firstPairPosition) {
             return false;
         }
 
-        $lastCardOfPair             = $cards[$firstPairPositions[1]];
-        $nextCardTolastCardOfPair   = $cards[$firstPairPositions[1]+1];
+        $lastCardOfPair             = $cards[$firstPairPosition+1];
+        $nextCardTolastCardOfPair   = $cards[$firstPairPosition+2];
 
         if ($lastCardOfPair->getNumber() === $nextCardTolastCardOfPair->getNumber()) {
             return true;
@@ -133,13 +133,13 @@ class PokerKata implements PokerKataInterface
      */
     private function isCombinationTwoPair(array $cards)
     {
-        $firstPairPositions = $this->findCardPair($cards);
+        $firstPairPosition = $this->findCardPair($cards);
 
-        if (empty($firstPairPositions)) {
+        if (null === $firstPairPosition) {
             return false;
         }
 
-        $lastCardOfFirstPair = $firstPairPositions[1];
+        $lastCardOfFirstPair = $firstPairPosition+1;
 
         $cards = array_slice($cards, $lastCardOfFirstPair+1);
 
@@ -153,9 +153,9 @@ class PokerKata implements PokerKataInterface
      */
     private function isCombinationPair(array $cards)
     {
-        $positions = $this->findCardPair($cards);
+        $position = $this->findCardPair($cards);
 
-        return !empty($positions);
+        return null !== $position;
     }
 
     /**
@@ -172,12 +172,12 @@ class PokerKata implements PokerKataInterface
 
         foreach ($cards as $key => $card) {
             if ($previousNumber === $card->getNumber()) {
-                return array($key, $key+1);
+                return $key;
             }
 
             $previousNumber = $card->getNumber();
         }
 
-        return array();
+        return null;
     }
 }
