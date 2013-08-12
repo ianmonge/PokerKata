@@ -12,26 +12,13 @@ class PokerKata implements PokerKataInterface
     /**
      * {@inheritdoc}
      */
-    public function getWinnerCombination(CardSet $cardSet)
+    public function getWinnerCombination(SortedCardSet $cardSet)
     {
         $cards = $cardSet->getArrayCopy();
 
-        $sortedCards = $this->sortCards($cards);
-
-        $winnerCombination = $this->findWinnerCombination($sortedCards);
+        $winnerCombination = $this->findWinnerCombination($cards);
 
         return $winnerCombination;
-    }
-
-    private function sortCards(array $cards)
-    {
-        $sortFunction = function(Card $a, Card $b) {
-            return $a->getNumber() > $b->getNumber() ? 1 : -1;
-        };
-
-        usort($cards, $sortFunction);
-
-        return $cards;
     }
 
     /**

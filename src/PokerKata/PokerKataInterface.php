@@ -10,9 +10,9 @@ namespace PokerKata;
 interface PokerKataInterface
 {
     /**
-     * @param CardSet $cardSet
+     * @param SortedCardSet $cardSet
      *
      * @return string
      */
-    public function getWinnerCombination(CardSet $cardSet);
+    public function getWinnerCombination(SortedCardSet $cardSet);
 }

@@ -3,7 +3,7 @@
 namespace PokerKata\Tests;
 
 use PokerKata\Card;
-use PokerKata\CardSet;
+use PokerKata\SortedCardSet;
 use PokerKata\CardSetCombination;
 use PokerKata\PokerKata;
 
@@ -47,7 +47,7 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetWinnerCombination(array $cards, $expectedCombination)
     {
-        $cardSet = new CardSet($cards);
+        $cardSet = new SortedCardSet($cards);
 
         $actualCombination = $this->pokerKata->getWinnerCombination($cardSet);
 
