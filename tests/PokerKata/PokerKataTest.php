@@ -157,6 +157,26 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 CardSetCombination::COMB_FULL_HOUSE,
             ),
+            'Four of a kind High' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, Card::NUM_JACK),
+                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_DIAMONTS, Card::NUM_JACK),
+                ),
+                CardSetCombination::COMB_FOUR_OK_A_KIND,
+            ),
+            'Four of a kind Low' => array(
+                array(
+                    new Card(Card::SUIT_CLUB, 7),
+                    new Card(Card::SUIT_HEARTS, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, 7),
+                    new Card(Card::SUIT_HEARTS, 7),
+                    new Card(Card::SUIT_DIAMONTS, 7),
+                ),
+                CardSetCombination::COMB_FOUR_OK_A_KIND,
+            ),
         );
     }
 }

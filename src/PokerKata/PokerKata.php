@@ -26,7 +26,9 @@ class PokerKata implements PokerKataInterface
      */
     private function findWinnerCombination(array $cards)
     {
-        if ($this->isCombinationFullHouse($cards)) {
+        if ($this->isCombinationFourOfAKind($cards)) {
+            return CardSetCombination::COMB_FOUR_OK_A_KIND;
+        } elseif ($this->isCombinationFullHouse($cards)) {
             return CardSetCombination::COMB_FULL_HOUSE;
         } elseif ($this->isCombinationFlush($cards)) {
             return CardSetCombination::COMB_FLUSH;
@@ -40,6 +42,33 @@ class PokerKata implements PokerKataInterface
             return CardSetCombination::COMB_PAIR;
         }
         return CardSetCombination::COMB_HIGH_CARD;
+    }
+
+    /**
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isCombinationFourOfAKind(array $cards)
+    {
+        $firstCard = $this->findCardThreeOfAKind($cards);
+
+        if (null === $firstCard) {
+            return false;
+        }
+
+        if ($firstCard > 1) {
+            return false;
+        }
+
+        $lastCardOfThree            = $cards[$firstCard+2];
+        $nextCardTolastCardOfThree  = $cards[$firstCard+3];
+
+        if ($lastCardOfThree->getNumber() === $nextCardTolastCardOfThree->getNumber()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -188,12 +217,17 @@ class PokerKata implements PokerKataInterface
         /**
          * If the third card is no the equals, maybe the three cards that rests are a three of a kind.
          */
-        if ($firstCard === 0) {
+        if ($firstCard === 0 && 2 < count($cards)) {
             unset($cards[$firstCard]);
             unset($cards[$firstCard+1]);
 
             $cards = array_values($cards);
-            return $this->findCardThreeOfAKind($cards);
+
+            $firstCard = $this->findCardThreeOfAKind($cards);
+            if (null === $firstCard) {
+                return null;
+            }
+            return $firstCard + 2;
         }
 
         return null;
