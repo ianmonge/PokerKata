@@ -110,20 +110,13 @@ class PokerKata implements PokerKataInterface
      */
     private function isCombinationThreeOfAKind(array $cards)
     {
-        $firstPairPosition = $this->findCardPair($cards);
+        $firstCard = $this->findCardThreeOfAKind($cards);
 
-        if (null === $firstPairPosition) {
+        if (null === $firstCard) {
             return false;
         }
 
-        $lastCardOfPair             = $cards[$firstPairPosition+1];
-        $nextCardTolastCardOfPair   = $cards[$firstPairPosition+2];
-
-        if ($lastCardOfPair->getNumber() === $nextCardTolastCardOfPair->getNumber()) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -159,11 +152,38 @@ class PokerKata implements PokerKataInterface
     }
 
     /**
-     * Find a card pair. If it find them, it return their positions. If not, it returns an empty array.
+     * Find a card three of a kind. If it find them, it return the position of the first card.
+     * Else it returns null.
      *
      * @param array $cards
      *
-     * @return array
+     * @return int
+     */
+    private function findCardThreeOfAKind(array $cards)
+    {
+        $firstCard = $this->findCardPair($cards);
+
+        if (null === $firstCard) {
+            return null;
+        }
+
+        $lastCardOfPair             = $cards[$firstCard+1];
+        $nextCardTolastCardOfPair   = $cards[$firstCard+2];
+
+        if ($lastCardOfPair->getNumber() === $nextCardTolastCardOfPair->getNumber()) {
+            return $firstCard;
+        }
+
+        return null;
+    }
+
+    /**
+     * Find a card pair. If it find them, it return the position of the first card.
+     * Else it returns null.
+     *
+     * @param array $cards
+     *
+     * @return int
      */
     private function findCardPair(array $cards)
     {
