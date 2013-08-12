@@ -91,9 +91,9 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 array(
                     new Card(Card::SUIT_HEARTS, 3),
                     new Card(Card::SUIT_CLUB, 1),
-                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_HEARTS, 7),
                     new Card(Card::SUIT_DIAMONTS, 3),
-                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_HEARTS, 3),
                 ),
                 CardSetCombination::COMB_THREE_OF_A_KIND,
             ),
@@ -136,6 +136,26 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                     new Card(Card::SUIT_HEARTS, 4),
                 ),
                 CardSetCombination::COMB_FLUSH,
+            ),
+            'Full house Low' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                ),
+                CardSetCombination::COMB_FULL_HOUSE,
+            ),
+            'Full house High' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_DIAMONTS, Card::NUM_JACK),
+                ),
+                CardSetCombination::COMB_FULL_HOUSE,
             ),
         );
     }

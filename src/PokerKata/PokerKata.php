@@ -39,7 +39,9 @@ class PokerKata implements PokerKataInterface
      */
     private function findWinnerCombination(array $cards)
     {
-        if ($this->isCombinationFlush($cards)) {
+        if ($this->isCombinationFullHouse($cards)) {
+            return CardSetCombination::COMB_FULL_HOUSE;
+        } elseif ($this->isCombinationFlush($cards)) {
             return CardSetCombination::COMB_FLUSH;
         } elseif ($this->isCombinationStraight($cards)) {
             return CardSetCombination::COMB_STRAIGHT;
@@ -51,6 +53,28 @@ class PokerKata implements PokerKataInterface
             return CardSetCombination::COMB_PAIR;
         }
         return CardSetCombination::COMB_HIGH_CARD;
+    }
+
+    /**
+     * @param array $cards
+     *
+     * @return bool
+     */
+    private function isCombinationFullHouse(array $cards)
+    {
+        $firstCard = $this->findCardThreeOfAKind($cards);
+
+        if (null === $firstCard) {
+            return false;
+        }
+
+        unset($cards[$firstCard]);
+        unset($cards[$firstCard+1]);
+        unset($cards[$firstCard+2]);
+
+        $firstCard = $this->findCardPair($cards);
+
+        return null !== $firstCard;
     }
 
     /**
@@ -172,6 +196,17 @@ class PokerKata implements PokerKataInterface
 
         if ($lastCardOfPair->getNumber() === $nextCardTolastCardOfPair->getNumber()) {
             return $firstCard;
+        }
+
+        /**
+         * If the third card is no the equals, maybe the three cards that rests are a three of a kind.
+         */
+        if ($firstCard === 0) {
+            unset($cards[$firstCard]);
+            unset($cards[$firstCard+1]);
+
+            $cards = array_values($cards);
+            return $this->findCardThreeOfAKind($cards);
         }
 
         return null;
