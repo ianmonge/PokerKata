@@ -3,11 +3,11 @@
 namespace PokerKata;
 
 /**
- * Class CardSetCombination
+ * Class Combination
  *
  * @package PokerKata
  */
-final class CardSetCombination
+final class Combination
 {
     const COMB_ROYAL_FLUSH = 'royal flush';             // Escalera real
     const COMB_STRAIGHT_FLUSH = 'straight flush';       // Escalera de color

@@ -27,21 +27,21 @@ class PokerKata implements PokerKataInterface
     private function findWinnerCombination(array $cards)
     {
         if ($this->isCombinationFourOfAKind($cards)) {
-            return CardSetCombination::COMB_FOUR_OK_A_KIND;
+            return Combination::COMB_FOUR_OK_A_KIND;
         } elseif ($this->isCombinationFullHouse($cards)) {
-            return CardSetCombination::COMB_FULL_HOUSE;
+            return Combination::COMB_FULL_HOUSE;
         } elseif ($this->isCombinationFlush($cards)) {
-            return CardSetCombination::COMB_FLUSH;
+            return Combination::COMB_FLUSH;
         } elseif ($this->isCombinationStraight($cards)) {
-            return CardSetCombination::COMB_STRAIGHT;
+            return Combination::COMB_STRAIGHT;
         } elseif ($this->isCombinationThreeOfAKind($cards)) {
-            return CardSetCombination::COMB_THREE_OF_A_KIND;
+            return Combination::COMB_THREE_OF_A_KIND;
         } elseif ($this->isCombinationTwoPair($cards)) {
-            return CardSetCombination::COMB_TWO_PAIR;
+            return Combination::COMB_TWO_PAIR;
         } elseif ($this->isCombinationPair($cards)) {
-            return CardSetCombination::COMB_PAIR;
+            return Combination::COMB_PAIR;
         }
-        return CardSetCombination::COMB_HIGH_CARD;
+        return Combination::COMB_HIGH_CARD;
     }
 
     /**
