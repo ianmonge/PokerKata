@@ -43,18 +43,23 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
      * @param array  $cards
      * @param string $expectedCombination
      *
-     * @dataProvider getCardsDataProvider
+     * @dataProvider getDataProviderCards
      */
     public function testGetWinnerCombination(array $cards, $expectedCombination)
     {
         $cardSet = new SortedCardSet($cards);
 
-        $actualCombination = $this->pokerKata->getWinnerCombination($cardSet);
+        $actualCombination = $this->pokerKata->getBestCombination($cardSet);
 
         $this->assertEquals($expectedCombination,$actualCombination);
     }
 
-    public function getCardsDataProvider()
+    /**
+     * Return the data provider of cards.
+     *
+     * @return array
+     */
+    public function getDataProviderCards()
     {
         return array(
             'High card' => array(

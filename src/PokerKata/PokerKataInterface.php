@@ -14,5 +14,5 @@ interface PokerKataInterface
      *
      * @return string
      */
-    public function getWinnerCombination(SortedCardSet $cardSet);
+    public function getBestCombination(SortedCardSet $cardSet);
 }

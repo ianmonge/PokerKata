@@ -12,7 +12,7 @@ class PokerKata implements PokerKataInterface
     /**
      * {@inheritdoc}
      */
-    public function getWinnerCombination(SortedCardSet $cardSet)
+    public function getBestCombination(SortedCardSet $cardSet)
     {
         $cards = $cardSet->getArrayCopy();
 

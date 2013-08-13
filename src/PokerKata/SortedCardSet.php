@@ -2,14 +2,14 @@
 
 namespace PokerKata;
 
-use ArrayIterator;
+use ArrayObject;
 
 /**
  * Class SortedCardSet
  *
  * @package PokerKata
  */
-class SortedCardSet extends ArrayIterator
+class SortedCardSet extends ArrayObject
 {
     /**
      * @param array $cards
