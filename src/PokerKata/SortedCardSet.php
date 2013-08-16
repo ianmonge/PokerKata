@@ -83,6 +83,19 @@ class SortedCardSet extends ArrayObject
 
         return $this->offsetGet($nextIndex);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($index)
+    {
+        $card = parent::offsetGet($index);
+
+        $card->setIndex($index);
+
+        return $card;
+    }
+
     /**
      * Move to the next card and return it.
      *
@@ -101,29 +114,47 @@ class SortedCardSet extends ArrayObject
     public function setIndex($index)
     {
          $this->index = $index;
+
+        return $this;
+    }
+
+    /**
+     * @param array $excludeIndex
+     */
+    public function getSubSortedSetCardExcluding(array $excludeIndex)
+    {
+        $cards = array();
+
+        foreach ($this as $index => $card) {
+            if (!in_array($index, $excludeIndex)) {
+                $cards[] = $card;
+            }
+        }
+
+        return new SortedCardSet($cards);
     }
 
     /**
      * Increment the index.
      *
-     * @return int
+     * @return SortedCardSet
      */
     private function incrIndex()
     {
         $this->setIndex($this->getIndex() + 1);
 
-        return $this->getIndex();
+        return $this;
     }
 
     /**
      * Decrement the index.
      *
-     * @return int
+     * @return SortedCardSet
      */
     private function decrIndex()
     {
         $this->setIndex($this->getIndex() - 1);
 
-        return $this->getIndex();
+        return $this;
     }
 }

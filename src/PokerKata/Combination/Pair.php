@@ -21,7 +21,11 @@ class Pair extends AbstractCombination
         while ($cards->hasNext()) {
             $nextCard = $cards->getNext();
             if ($currentCard->getNumber() === $nextCard->getNumber()) {
-                $this->setIndex($cards->getIndex());
+                $index = array(
+                    $currentCard->getIndex(),
+                    $nextCard->getIndex(),
+                );
+                $this->setIndex($index);
                 return true;
             }
 

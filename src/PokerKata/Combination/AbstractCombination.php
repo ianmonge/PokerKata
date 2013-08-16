@@ -12,11 +12,11 @@ use PokerKata\SortedCardSet;
 abstract class AbstractCombination
 {
     /**
-     * Index of the first card that matches the combination.
+     * Index of cards that matches the combination.
      *
      * @var int
      */
-    protected $index;
+    protected $index = array();
 
     /**
      * @param SortedCardSet $cards
@@ -28,9 +28,9 @@ abstract class AbstractCombination
     /**
      * Return the index.
      *
-     * @return int
+     * @return array
      */
-    public function getIndex()
+    public function getIndices()
     {
         return $this->index;
     }
@@ -40,7 +40,7 @@ abstract class AbstractCombination
      *
      * @param $index
      */
-    protected function setIndex($index)
+    protected function setIndex(array $index)
     {
         $this->index = $index;
     }

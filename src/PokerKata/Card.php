@@ -35,6 +35,11 @@ class Card
     private $suit;
 
     /**
+     * @var int
+     */
+    private $index;
+
+    /**
      * Construct.
      *
      * @param int $suit
@@ -60,5 +65,21 @@ class Card
     public function getSuit()
     {
         return $this->suit;
+    }
+
+    /**
+     * @param int $index
+     */
+    public function setIndex($index)
+    {
+        $this->index = $index;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIndex()
+    {
+        return $this->index;
     }
 }

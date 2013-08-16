@@ -3,6 +3,8 @@
 namespace PokerKata;
 
 use PokerKata\Combination\Pair;
+use PokerKata\Combination\ThreeOfAKind;
+use PokerKata\Combination\TwoPair;
 
 /**
  * Class PokerKata
@@ -26,11 +28,13 @@ class PokerKata implements PokerKataInterface
 //            return Combination::COMB_STRAIGHT;
 //        } elseif ($this->isCombinationThreeOfAKind($cards)) {
 //            return Combination::COMB_THREE_OF_A_KIND;
-//        } elseif ($this->isCombinationTwoPair($cards)) {
-//            return Combination::COMB_TWO_PAIR;
 //        } else
-        $combinationPair = new Pair();
-        if ($combinationPair->match($cards)) {
+        $combinationPair            = new Pair();
+        $combinationTwoPair         = new TwoPair();
+//        $combinationThreeOfAKind    = new ThreeOfAKind();
+        if ($combinationTwoPair->match($cards)) {
+            return Combination::COMB_TWO_PAIR;
+        } elseif ($combinationPair->match($cards)) {
             return Combination::COMB_PAIR;
         }
         return Combination::COMB_HIGH_CARD;

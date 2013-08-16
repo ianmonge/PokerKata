@@ -82,16 +82,16 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::COMB_PAIR,
             ),
-//            'Two pair' => array(
-//                array(
-//                    new Card(Card::SUIT_HEARTS, 3),
-//                    new Card(Card::SUIT_CLUB, 1),
-//                    new Card(Card::SUIT_HEARTS, 1),
-//                    new Card(Card::SUIT_DIAMONTS, 3),
-//                    new Card(Card::SUIT_SPADE, 8),
-//                ),
-//                Combination::COMB_TWO_PAIR,
-//            ),
+            'Two pair' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_CLUB, 1),
+                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                    new Card(Card::SUIT_SPADE, 8),
+                ),
+                Combination::COMB_TWO_PAIR,
+            ),
 //            'Three of a king' => array(
 //                array(
 //                    new Card(Card::SUIT_HEARTS, 3),
