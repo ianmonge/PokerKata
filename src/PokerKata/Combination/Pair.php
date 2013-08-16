@@ -16,6 +16,8 @@ class Pair extends AbstractCombination
      */
     public function match(SortedCardSet $cards)
     {
+        $cards->resetIndex();
+
         $currentCard = $cards->getCurrent();
 
         while ($cards->hasNext()) {

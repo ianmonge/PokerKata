@@ -16,6 +16,8 @@ class HighCard extends AbstractCombination
      */
     public function match(SortedCardSet $cards)
     {
+        $cards->resetIndex();
+
         $firstCard = $cards->getCurrent();
 
         if (1 === $firstCard->getNumber()) {

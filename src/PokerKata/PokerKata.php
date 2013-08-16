@@ -2,7 +2,9 @@
 
 namespace PokerKata;
 
+use PokerKata\Combination\HighCard;
 use PokerKata\Combination\Pair;
+use PokerKata\Combination\Straight;
 use PokerKata\Combination\ThreeOfAKind;
 use PokerKata\Combination\TwoPair;
 
@@ -26,18 +28,23 @@ class PokerKata implements PokerKataInterface
 //            return Combination::COMB_FLUSH;
 //        } elseif ($this->isCombinationStraight($cards)) {
 //            return Combination::COMB_STRAIGHT;
+        $combinationHighCard        = new HighCard();
         $combinationPair            = new Pair();
         $combinationTwoPair         = new TwoPair();
         $combinationThreeOfAKind    = new ThreeOfAKind();
+        $combinationStraight        = new Straight();
 
-        if ($combinationThreeOfAKind->match($cards)) {
+        if ($combinationStraight->match($cards)) {
+            return Combination::COMB_STRAIGHT;
+        } elseif ($combinationThreeOfAKind->match($cards)) {
             return Combination::COMB_THREE_OF_A_KIND;
         } elseif ($combinationTwoPair->match($cards)) {
             return Combination::COMB_TWO_PAIR;
         } elseif ($combinationPair->match($cards)) {
             return Combination::COMB_PAIR;
+        } elseif ($combinationHighCard->match($cards)) {
+            return Combination::COMB_HIGH_CARD;
         }
-        return Combination::COMB_HIGH_CARD;
     }
 
     /**
@@ -99,35 +106,6 @@ class PokerKata implements PokerKataInterface
             }
 
             $previousSuit = $card->getSuit();
-        }
-
-        return true;
-    }
-
-    /**
-     * @param array $cards
-     *
-     * @return bool
-     */
-    private function isCombinationStraight(array $cards)
-    {
-        if (current($cards)->getNumber() === 1
-            && $cards[1]->getNumber() === 10
-        ) {
-            $aceCard = array_shift($cards);
-            $newAceCard = new Card($aceCard->getSuit(), 14);
-            array_push($cards, $newAceCard);
-        }
-
-        $previousNumber = current($cards)->getNumber();
-        array_shift($cards);
-
-        foreach ($cards as $card) {
-            if ($previousNumber+1 !== $card->getNumber()) {
-                return false;
-            }
-
-            $previousNumber = $card->getNumber();
         }
 
         return true;

@@ -150,6 +150,15 @@ class SortedCardSet extends ArrayObject
         return new SortedCardSet($cards);
     }
 
+    public function resetIndex()
+    {
+        $this->setIndex(0);
+    }
+
+    public function keys()
+    {
+        return array_keys($this->getArrayCopy());
+    }
     /**
      * Increment the index.
      *

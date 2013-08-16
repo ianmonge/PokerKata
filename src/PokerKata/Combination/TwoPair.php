@@ -16,6 +16,8 @@ class TwoPair extends AbstractCombination
      */
     public function match(SortedCardSet $cards)
     {
+        $cards->resetIndex();
+
         $combinationPair = new Pair();
 
         if (!$combinationPair->match($cards)) {
