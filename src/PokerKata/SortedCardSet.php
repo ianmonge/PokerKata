@@ -119,6 +119,22 @@ class SortedCardSet extends ArrayObject
     }
 
     /**
+     * @param array $includeIndex
+     */
+    public function getSubSortedSetCardIncluding(array $includeIndex)
+    {
+        $cards = array();
+
+        foreach ($this as $index => $card) {
+            if (in_array($index, $includeIndex)) {
+                $cards[] = $card;
+            }
+        }
+
+        return new SortedCardSet($cards);
+    }
+
+    /**
      * @param array $excludeIndex
      */
     public function getSubSortedSetCardExcluding(array $excludeIndex)

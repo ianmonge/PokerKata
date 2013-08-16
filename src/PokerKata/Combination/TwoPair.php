@@ -32,7 +32,7 @@ class TwoPair extends AbstractCombination
         $secondPairIndices = $combinationPair->getIndices();
 
         $indices = array_merge($firstPairIndices, $secondPairIndices);
-        $this->setIndex($indices);
+        $this->setIndices($indices);
 
         return true;
     }

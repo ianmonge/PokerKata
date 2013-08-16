@@ -40,7 +40,7 @@ abstract class AbstractCombination
      *
      * @param $index
      */
-    protected function setIndex(array $index)
+    protected function setIndices(array $index)
     {
         $this->index = $index;
     }
