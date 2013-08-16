@@ -132,16 +132,16 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::COMB_STRAIGHT,
             ),
-//            'Flush' => array(
-//                array(
-//                    new Card(Card::SUIT_HEARTS, 10),
-//                    new Card(Card::SUIT_HEARTS, 1),
-//                    new Card(Card::SUIT_HEARTS, Card::NUM_QUEEN),
-//                    new Card(Card::SUIT_HEARTS, 5),
-//                    new Card(Card::SUIT_HEARTS, 4),
-//                ),
-//                Combination::COMB_FLUSH,
-//            ),
+            'Flush' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 10),
+                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_HEARTS, Card::NUM_QUEEN),
+                    new Card(Card::SUIT_HEARTS, 5),
+                    new Card(Card::SUIT_HEARTS, 4),
+                ),
+                Combination::COMB_FLUSH,
+            ),
 //            'Full house Low' => array(
 //                array(
 //                    new Card(Card::SUIT_HEARTS, 3),

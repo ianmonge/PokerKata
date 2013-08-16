@@ -110,6 +110,8 @@ class SortedCardSet extends ArrayObject
 
     /**
      * @param int $index
+     *
+     * @return SortedCardSet
      */
     public function setIndex($index)
     {
@@ -120,6 +122,8 @@ class SortedCardSet extends ArrayObject
 
     /**
      * @param array $includeIndex
+     *
+     * @return SortedCardSet
      */
     public function getSubSortedSetCardIncluding(array $includeIndex)
     {
@@ -136,6 +140,8 @@ class SortedCardSet extends ArrayObject
 
     /**
      * @param array $excludeIndex
+     *
+     * @return SortedCardSet
      */
     public function getSubSortedSetCardExcluding(array $excludeIndex)
     {
@@ -150,15 +156,24 @@ class SortedCardSet extends ArrayObject
         return new SortedCardSet($cards);
     }
 
+    /**
+     * Reset the index to the first position.
+     */
     public function resetIndex()
     {
         $this->setIndex(0);
     }
 
+    /**
+     * Return all the indices.
+     *
+     * @return array
+     */
     public function keys()
     {
         return array_keys($this->getArrayCopy());
     }
+
     /**
      * Increment the index.
      *

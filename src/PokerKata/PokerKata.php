@@ -2,6 +2,7 @@
 
 namespace PokerKata;
 
+use PokerKata\Combination\Flush;
 use PokerKata\Combination\HighCard;
 use PokerKata\Combination\Pair;
 use PokerKata\Combination\Straight;
@@ -24,17 +25,16 @@ class PokerKata implements PokerKataInterface
 //            return Combination::COMB_FOUR_OK_A_KIND;
 //        } elseif ($this->isCombinationFullHouse($cards)) {
 //            return Combination::COMB_FULL_HOUSE;
-//        } elseif ($this->isCombinationFlush($cards)) {
-//            return Combination::COMB_FLUSH;
-//        } elseif ($this->isCombinationStraight($cards)) {
-//            return Combination::COMB_STRAIGHT;
         $combinationHighCard        = new HighCard();
         $combinationPair            = new Pair();
         $combinationTwoPair         = new TwoPair();
         $combinationThreeOfAKind    = new ThreeOfAKind();
         $combinationStraight        = new Straight();
+        $combinationFlush           = new Flush();
 
-        if ($combinationStraight->match($cards)) {
+        if ($combinationFlush->match($cards)) {
+            return Combination::COMB_FLUSH;
+        } elseif ($combinationStraight->match($cards)) {
             return Combination::COMB_STRAIGHT;
         } elseif ($combinationThreeOfAKind->match($cards)) {
             return Combination::COMB_THREE_OF_A_KIND;
@@ -88,26 +88,5 @@ class PokerKata implements PokerKataInterface
         unset($cards[$firstCardIndex+2]);
 
         return $this->isCombinationPair($cards);
-    }
-
-    /**
-     * @param array $cards
-     *
-     * @return bool
-     */
-    private function isCombinationFlush(array $cards)
-    {
-        $previousSuit = current($cards)->getSuit();
-        array_shift($cards);
-
-        foreach ($cards as $card) {
-            if ($previousSuit !== $card->getSuit()) {
-                return false;
-            }
-
-            $previousSuit = $card->getSuit();
-        }
-
-        return true;
     }
 }
