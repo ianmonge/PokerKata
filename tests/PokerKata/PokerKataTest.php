@@ -64,6 +64,16 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
         return array(
             'High card' => array(
                 array(
+                    new Card(Card::SUIT_CLUB, Card::NUM_QUEEN),
+                    new Card(Card::SUIT_HEARTS, Card::NUM_KING),
+                    new Card(Card::SUIT_HEARTS, 5),
+                    new Card(Card::SUIT_SPADE, 8),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                ),
+                Combination::COMB_HIGH_CARD,
+            ),
+            'High card with an Ace' => array(
+                array(
                     new Card(Card::SUIT_CLUB, 1),
                     new Card(Card::SUIT_HEARTS, Card::NUM_KING),
                     new Card(Card::SUIT_HEARTS, 5),
@@ -92,13 +102,33 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::COMB_TWO_PAIR,
             ),
-            'Three of a kind' => array(
+            'Three of a kind at the beginning' => array(
                 array(
                     new Card(Card::SUIT_HEARTS, 3),
                     new Card(Card::SUIT_CLUB, 1),
                     new Card(Card::SUIT_HEARTS, 7),
                     new Card(Card::SUIT_DIAMONTS, 3),
                     new Card(Card::SUIT_HEARTS, 3),
+                ),
+                Combination::COMB_THREE_OF_A_KIND,
+            ),
+            'Three of a kind' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_CLUB, 1),
+                    new Card(Card::SUIT_HEARTS, 7),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                    new Card(Card::SUIT_HEARTS, 1),
+                ),
+                Combination::COMB_THREE_OF_A_KIND,
+            ),
+            'Three of a kind at the end' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 7),
+                    new Card(Card::SUIT_CLUB, 1),
+                    new Card(Card::SUIT_HEARTS, 7),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                    new Card(Card::SUIT_HEARTS, 7),
                 ),
                 Combination::COMB_THREE_OF_A_KIND,
             ),
