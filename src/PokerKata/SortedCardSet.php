@@ -65,14 +65,6 @@ class SortedCardSet extends ArrayObject
     }
 
     /**
-     * @return bool
-     */
-    public function hasPrev()
-    {
-        return $this->offsetExists($this->getIndex() - 1);
-    }
-
-    /**
      * Get the next Card, without move the index.
      *
      * @return Card
@@ -182,18 +174,6 @@ class SortedCardSet extends ArrayObject
     private function incrIndex()
     {
         $this->setIndex($this->getIndex() + 1);
-
-        return $this;
-    }
-
-    /**
-     * Decrement the index.
-     *
-     * @return SortedCardSet
-     */
-    private function decrIndex()
-    {
-        $this->setIndex($this->getIndex() - 1);
 
         return $this;
     }
