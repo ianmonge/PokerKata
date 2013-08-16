@@ -2,6 +2,8 @@
 
 namespace PokerKata;
 
+use PokerKata\Combination\Pair;
+
 /**
  * Class PokerKata
  *
@@ -12,33 +14,23 @@ class PokerKata implements PokerKataInterface
     /**
      * {@inheritdoc}
      */
-    public function getBestCombination(SortedCardSet $cardSet)
+    public function getBestCombination(SortedCardSet $cards)
     {
-        $cards = $cardSet->getArrayCopy();
-
-        $winnerCombination = $this->findWinnerCombination($cards);
-
-        return $winnerCombination;
-    }
-
-    /**
-     * @param array $cards
-     */
-    private function findWinnerCombination(array $cards)
-    {
-        if ($this->isCombinationFourOfAKind($cards)) {
-            return Combination::COMB_FOUR_OK_A_KIND;
-        } elseif ($this->isCombinationFullHouse($cards)) {
-            return Combination::COMB_FULL_HOUSE;
-        } elseif ($this->isCombinationFlush($cards)) {
-            return Combination::COMB_FLUSH;
-        } elseif ($this->isCombinationStraight($cards)) {
-            return Combination::COMB_STRAIGHT;
-        } elseif ($this->isCombinationThreeOfAKind($cards)) {
-            return Combination::COMB_THREE_OF_A_KIND;
-        } elseif ($this->isCombinationTwoPair($cards)) {
-            return Combination::COMB_TWO_PAIR;
-        } elseif ($this->isCombinationPair($cards)) {
+//        if ($this->isCombinationFourOfAKind($cards)) {
+//            return Combination::COMB_FOUR_OK_A_KIND;
+//        } elseif ($this->isCombinationFullHouse($cards)) {
+//            return Combination::COMB_FULL_HOUSE;
+//        } elseif ($this->isCombinationFlush($cards)) {
+//            return Combination::COMB_FLUSH;
+//        } elseif ($this->isCombinationStraight($cards)) {
+//            return Combination::COMB_STRAIGHT;
+//        } elseif ($this->isCombinationThreeOfAKind($cards)) {
+//            return Combination::COMB_THREE_OF_A_KIND;
+//        } elseif ($this->isCombinationTwoPair($cards)) {
+//            return Combination::COMB_TWO_PAIR;
+//        } else
+        $combinationPair = new Pair();
+        if ($combinationPair->match($cards)) {
             return Combination::COMB_PAIR;
         }
         return Combination::COMB_HIGH_CARD;
@@ -174,26 +166,14 @@ class PokerKata implements PokerKataInterface
     }
 
     /**
-     * @param array $cards
-     *
-     * @return bool
-     */
-    private function isCombinationPair(array $cards)
-    {
-        $position = $this->findCardPair($cards);
-
-        return null !== $position;
-    }
-
-    /**
      * Find a card three of a kind. If it find them, it return the position of the first card.
      * Else it returns null.
      *
-     * @param array $cards
+     * @param SortedCardSet $cards
      *
      * @return int
      */
-    private function findCardThreeOfAKind(array $cards)
+    private function findCardThreeOfAKind(SortedCardSet $cards)
     {
         $firstCard = $this->findCardPair($cards);
 
@@ -227,27 +207,4 @@ class PokerKata implements PokerKataInterface
         return null;
     }
 
-    /**
-     * Find a card pair. If it find them, it return the position of the first card.
-     * Else it returns null.
-     *
-     * @param array $cards
-     *
-     * @return int
-     */
-    private function findCardPair(array $cards)
-    {
-        $previousNumber = current($cards)->getNumber();
-        array_shift($cards);
-
-        foreach ($cards as $key => $card) {
-            if ($previousNumber === $card->getNumber()) {
-                return $key;
-            }
-
-            $previousNumber = $card->getNumber();
-        }
-
-        return null;
-    }
 }

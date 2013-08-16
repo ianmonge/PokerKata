@@ -12,30 +12,118 @@ use ArrayObject;
 class SortedCardSet extends ArrayObject
 {
     /**
+     * Current index in the set.
+     *
+     * @var int
+     */
+    private $index = 0;
+
+    /**
      * @param array $cards
+     *
+     * @throws \Exception
      */
     public function __construct($cards = array())
     {
-        $sortedCards = $this->sortCards($cards);
+        // Validate that all the values are Card instances.
+        foreach ($cards as $card) {
+            if (!$card instanceof Card) {
+                throw new \Exception('The "SortedCardSet" class only accepts "Card" instances.');
+            }
+        }
 
-        parent::__construct($sortedCards);
+        parent::__construct($cards);
+
+        $this->asort();
+
+        // Reset the keys after the sort.
+        $this->exchangeArray(array_values($this->getArrayCopy()));
     }
 
     /**
-     * Sort the cards by their numbers.
-     *
-     * @param array $cards
-     *
-     * @return array
+     * @return Card
      */
-    private function sortCards(array $cards)
+    public function getCurrent()
     {
-        $sortFunction = function(Card $a, Card $b) {
-            return $a->getNumber() > $b->getNumber() ? 1 : -1;
-        };
+        return $this->offsetGet($this->getIndex());
+    }
 
-        usort($cards, $sortFunction);
+    /**
+     * @return int
+     */
+    public function getIndex()
+    {
+        return $this->index;
+    }
 
-        return $cards;
+    /**
+     * @return bool
+     */
+    public function hasNext()
+    {
+        return $this->offsetExists($this->getIndex() + 1);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPrev()
+    {
+        return $this->offsetExists($this->getIndex() - 1);
+    }
+
+    /**
+     * Get the next Card, without move the index.
+     *
+     * @return Card
+     */
+    public function getNext()
+    {
+        $nextIndex = $this->getIndex() + 1;
+
+        return $this->offsetGet($nextIndex);
+    }
+    /**
+     * Move to the next card and return it.
+     *
+     * @return Card
+     */
+    public function next()
+    {
+        $this->incrIndex();
+
+        return $this->getCurrent();
+    }
+
+    /**
+     * @param int $index
+     */
+    public function setIndex($index)
+    {
+         $this->index = $index;
+    }
+
+    /**
+     * Increment the index.
+     *
+     * @return int
+     */
+    private function incrIndex()
+    {
+        $this->setIndex($this->getIndex() + 1);
+
+        return $this->getIndex();
+    }
+
+    /**
+     * Decrement the index.
+     *
+     * @return int
+     */
+    private function decrIndex()
+    {
+        $this->setIndex($this->getIndex() - 1);
+
+        return $this->getIndex();
     }
 }
