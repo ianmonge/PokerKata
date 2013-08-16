@@ -51,20 +51,16 @@ class PokerKata implements PokerKataInterface
      */
     private function isCombinationFourOfAKind(array $cards)
     {
-        $firstCard = $this->findCardThreeOfAKind($cards);
+        $firstCardOfThreeIndex = $this->findCardThreeOfAKind($cards);
 
-        if (null === $firstCard) {
+        if (null === $firstCardOfThreeIndex || $firstCardOfThreeIndex > 1) {
             return false;
         }
 
-        if ($firstCard > 1) {
-            return false;
-        }
+        $lastCardOfThree           = $cards[$firstCardOfThreeIndex+2];
+        $nextCardToLastCardOfThree = $cards[$firstCardOfThreeIndex+3];
 
-        $lastCardOfThree            = $cards[$firstCard+2];
-        $nextCardTolastCardOfThree  = $cards[$firstCard+3];
-
-        if ($lastCardOfThree->getNumber() === $nextCardTolastCardOfThree->getNumber()) {
+        if ($lastCardOfThree->getNumber() === $nextCardToLastCardOfThree->getNumber()) {
             return true;
         }
 
@@ -78,19 +74,17 @@ class PokerKata implements PokerKataInterface
      */
     private function isCombinationFullHouse(array $cards)
     {
-        $firstCard = $this->findCardThreeOfAKind($cards);
+        $firstCardIndex = $this->findCardThreeOfAKind($cards);
 
-        if (null === $firstCard) {
+        if (null === $firstCardIndex || 1 === $firstCardIndex) {
             return false;
         }
 
-        unset($cards[$firstCard]);
-        unset($cards[$firstCard+1]);
-        unset($cards[$firstCard+2]);
+        unset($cards[$firstCardIndex]);
+        unset($cards[$firstCardIndex+1]);
+        unset($cards[$firstCardIndex+2]);
 
-        $firstCard = $this->findCardPair($cards);
-
-        return null !== $firstCard;
+        return $this->isCombinationPair($cards);
     }
 
     /**
