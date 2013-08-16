@@ -51,10 +51,10 @@ class ThreeOfAKind extends AbstractCombination
             }
             $indices[] = $index + 3;
         } else {
-            $secondPairIndices = $combinationPair->getIndices();
-            $indices = array_unique(array_merge($firstPairIndices, $secondPairIndices));
+            $indices = $includeIndices;
         }
 
+        sort($indices);
         $this->setIndices($indices);
 
         return true;

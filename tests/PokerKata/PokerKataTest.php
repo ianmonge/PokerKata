@@ -92,7 +92,7 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::COMB_TWO_PAIR,
             ),
-            'Three of a king' => array(
+            'Three of a kind' => array(
                 array(
                     new Card(Card::SUIT_HEARTS, 3),
                     new Card(Card::SUIT_CLUB, 1),
@@ -102,7 +102,7 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::COMB_THREE_OF_A_KIND,
             ),
-            'Straight at the begining' => array(
+            'Straight at the beginning' => array(
                 array(
                     new Card(Card::SUIT_HEARTS, 5),
                     new Card(Card::SUIT_HEARTS, 1),
@@ -162,26 +162,26 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::COMB_FULL_HOUSE,
             ),
-//            'Four of a kind High' => array(
-//                array(
-//                    new Card(Card::SUIT_HEARTS, Card::NUM_JACK),
-//                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
-//                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
-//                    new Card(Card::SUIT_HEARTS, 3),
-//                    new Card(Card::SUIT_DIAMONTS, Card::NUM_JACK),
-//                ),
-//                Combination::COMB_FOUR_OK_A_KIND,
-//            ),
-//            'Four of a kind Low' => array(
-//                array(
-//                    new Card(Card::SUIT_CLUB, 7),
-//                    new Card(Card::SUIT_HEARTS, Card::NUM_JACK),
-//                    new Card(Card::SUIT_SPADE, 7),
-//                    new Card(Card::SUIT_HEARTS, 7),
-//                    new Card(Card::SUIT_DIAMONTS, 7),
-//                ),
-//                Combination::COMB_FOUR_OK_A_KIND,
-//            ),
+            'Four of a kind High' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, Card::NUM_JACK),
+                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_DIAMONTS, Card::NUM_JACK),
+                ),
+                Combination::COMB_FOUR_OK_A_KIND,
+            ),
+            'Four of a kind Low' => array(
+                array(
+                    new Card(Card::SUIT_CLUB, 7),
+                    new Card(Card::SUIT_HEARTS, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, 7),
+                    new Card(Card::SUIT_HEARTS, 7),
+                    new Card(Card::SUIT_DIAMONTS, 7),
+                ),
+                Combination::COMB_FOUR_OK_A_KIND,
+            ),
         );
     }
 }

@@ -3,6 +3,7 @@
 namespace PokerKata;
 
 use PokerKata\Combination\Flush;
+use PokerKata\Combination\FourOfAKind;
 use PokerKata\Combination\FullHouse;
 use PokerKata\Combination\HighCard;
 use PokerKata\Combination\Pair;
@@ -22,8 +23,6 @@ class PokerKata implements PokerKataInterface
      */
     public function getBestCombination(SortedCardSet $cards)
     {
-//        if ($this->isCombinationFourOfAKind($cards)) {
-//            return Combination::COMB_FOUR_OK_A_KIND;
         $combinationHighCard        = new HighCard();
         $combinationPair            = new Pair();
         $combinationTwoPair         = new TwoPair();
@@ -31,8 +30,11 @@ class PokerKata implements PokerKataInterface
         $combinationStraight        = new Straight();
         $combinationFlush           = new Flush();
         $combinationFullHouse       = new FullHouse();
+        $combinationFourOfAKind     = new FourOfAKind();
 
-        if ($combinationFullHouse->match($cards)) {
+        if ($combinationFourOfAKind->match($cards)) {
+            return Combination::COMB_FOUR_OK_A_KIND;
+        } elseif ($combinationFullHouse->match($cards)) {
             return Combination::COMB_FULL_HOUSE;
         } elseif ($combinationFlush->match($cards)) {
             return Combination::COMB_FLUSH;
@@ -47,28 +49,7 @@ class PokerKata implements PokerKataInterface
         } elseif ($combinationHighCard->match($cards)) {
             return Combination::COMB_HIGH_CARD;
         }
-    }
 
-    /**
-     * @param array $cards
-     *
-     * @return bool
-     */
-    private function isCombinationFourOfAKind(array $cards)
-    {
-        $firstCardOfThreeIndex = $this->findCardThreeOfAKind($cards);
-
-        if (null === $firstCardOfThreeIndex || $firstCardOfThreeIndex > 1) {
-            return false;
-        }
-
-        $lastCardOfThree           = $cards[$firstCardOfThreeIndex+2];
-        $nextCardToLastCardOfThree = $cards[$firstCardOfThreeIndex+3];
-
-        if ($lastCardOfThree->getNumber() === $nextCardToLastCardOfThree->getNumber()) {
-            return true;
-        }
-
-        return false;
+        return null;
     }
 }
