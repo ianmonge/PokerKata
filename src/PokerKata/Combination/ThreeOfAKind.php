@@ -24,8 +24,8 @@ class ThreeOfAKind extends AbstractCombination
             return false;
         }
 
-        $pairIndices = $combinationPair->getIndices();
-        $secondCardIndex = $pairIndices[1];
+        $firstPairIndices = $combinationPair->getIndices();
+        $secondCardIndex = $firstPairIndices[1];
         $thirdCardIndex = $secondCardIndex + 1;
 
         if (!$cards->offsetExists($thirdCardIndex)) {
@@ -39,10 +39,22 @@ class ThreeOfAKind extends AbstractCombination
         $subset = $cards->getSubSortedSetCardIncluding($includeIndices);
 
         if (!$combinationPair->match($subset)) {
-            return false;
+            $subset = $cards->getSubSortedSetCardExcluding($firstPairIndices);
+
+            if (!$this->match($subset)) {
+                return false;
+            }
+
+            $indices = array();
+            foreach ($this->getIndices() as $index) {
+                $indices[] = $index + 2;
+            }
+            $indices[] = $index + 3;
+        } else {
+            $secondPairIndices = $combinationPair->getIndices();
+            $indices = array_unique(array_merge($firstPairIndices, $secondPairIndices));
         }
 
-        $indices = array_merge($pairIndices);
         $this->setIndices($indices);
 
         return true;

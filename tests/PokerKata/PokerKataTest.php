@@ -142,26 +142,26 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::COMB_FLUSH,
             ),
-//            'Full house Low' => array(
-//                array(
-//                    new Card(Card::SUIT_HEARTS, 3),
-//                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
-//                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
-//                    new Card(Card::SUIT_HEARTS, 3),
-//                    new Card(Card::SUIT_DIAMONTS, 3),
-//                ),
-//                Combination::COMB_FULL_HOUSE,
-//            ),
-//            'Full house High' => array(
-//                array(
-//                    new Card(Card::SUIT_HEARTS, 3),
-//                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
-//                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
-//                    new Card(Card::SUIT_HEARTS, 3),
-//                    new Card(Card::SUIT_DIAMONTS, Card::NUM_JACK),
-//                ),
-//                Combination::COMB_FULL_HOUSE,
-//            ),
+            'Full house Low' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_DIAMONTS, 3),
+                ),
+                Combination::COMB_FULL_HOUSE,
+            ),
+            'Full house High' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_CLUB, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_DIAMONTS, Card::NUM_JACK),
+                ),
+                Combination::COMB_FULL_HOUSE,
+            ),
 //            'Four of a kind High' => array(
 //                array(
 //                    new Card(Card::SUIT_HEARTS, Card::NUM_JACK),
