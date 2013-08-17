@@ -212,6 +212,26 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::FOUR_OK_A_KIND,
             ),
+            'Straight flush Low' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 1),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_HEARTS, 2),
+                    new Card(Card::SUIT_HEARTS, 4),
+                    new Card(Card::SUIT_HEARTS, 5),
+                ),
+                Combination::STRAIGHT_FLUSH,
+            ),
+            'Straight flush Middle' => array(
+                array(
+                    new Card(Card::SUIT_HEARTS, 7),
+                    new Card(Card::SUIT_HEARTS, 3),
+                    new Card(Card::SUIT_HEARTS, 6),
+                    new Card(Card::SUIT_HEARTS, 4),
+                    new Card(Card::SUIT_HEARTS, 5),
+                ),
+                Combination::STRAIGHT_FLUSH,
+            ),
         );
     }
 }

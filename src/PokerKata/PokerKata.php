@@ -2,14 +2,7 @@
 
 namespace PokerKata;
 
-use PokerKata\Combination\Flush;
-use PokerKata\Combination\FourOfAKind;
-use PokerKata\Combination\FullHouse;
-use PokerKata\Combination\HighCard;
-use PokerKata\Combination\Pair;
-use PokerKata\Combination\Straight;
-use PokerKata\Combination\ThreeOfAKind;
-use PokerKata\Combination\TwoPair;
+use PokerKata\Combination;
 
 /**
  * Class PokerKata
@@ -23,16 +16,7 @@ class PokerKata implements PokerKataInterface
      */
     public function getBestCombination(SortedCardSet $cards)
     {
-        $combinations = array(
-            new FourOfAKind(),
-            new FullHouse(),
-            new Flush(),
-            new Straight(),
-            new ThreeOfAKind(),
-            new TwoPair(),
-            new Pair(),
-            new HighCard(),
-        );
+        $combinations = $this->getCombinationsByPriority();
 
         foreach ($combinations as $combination) {
             if ($combination->match($cards)) {
@@ -41,5 +25,27 @@ class PokerKata implements PokerKataInterface
         }
 
         return null;
+    }
+
+    /**
+     * Return the combinations by order of priority.
+     *
+     * @return array
+     */
+    private function getCombinationsByPriority()
+    {
+        $combinations = array(
+            new Combination\StraightFlush(),
+            new Combination\FourOfAKind(),
+            new Combination\FullHouse(),
+            new Combination\Flush(),
+            new Combination\Straight(),
+            new Combination\ThreeOfAKind(),
+            new Combination\TwoPair(),
+            new Combination\Pair(),
+            new Combination\HighCard(),
+        );
+
+        return $combinations;
     }
 }
