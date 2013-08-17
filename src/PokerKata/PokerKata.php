@@ -35,6 +35,7 @@ class PokerKata implements PokerKataInterface
     private function getCombinationsByPriority()
     {
         $combinations = array(
+            new Combination\RoyalFlush(),
             new Combination\StraightFlush(),
             new Combination\FourOfAKind(),
             new Combination\FullHouse(),

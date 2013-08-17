@@ -232,6 +232,16 @@ class PokerKataTest extends \PHPUnit_Framework_TestCase
                 ),
                 Combination::STRAIGHT_FLUSH,
             ),
+            'Royal flush' => array(
+                array(
+                    new Card(Card::SUIT_SPADE, Card::NUM_QUEEN),
+                    new Card(Card::SUIT_SPADE, Card::NUM_JACK),
+                    new Card(Card::SUIT_SPADE, Card::NUM_KING),
+                    new Card(Card::SUIT_SPADE, 1),
+                    new Card(Card::SUIT_SPADE, 10),
+                ),
+                Combination::ROYAL_FLUSH,
+            ),
         );
     }
 }
