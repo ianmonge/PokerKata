@@ -14,6 +14,14 @@ class FullHouse extends AbstractCombination
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return Combination::FULL_HOUSE;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function match(SortedCardSet $cards)
     {
         $cards->resetIndex();

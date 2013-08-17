@@ -14,6 +14,14 @@ class FourOfAKind extends AbstractCombination
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return Combination::FOUR_OK_A_KIND;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function match(SortedCardSet $cards)
     {
         $cards->resetIndex();

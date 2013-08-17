@@ -14,6 +14,14 @@ class Pair extends AbstractCombination
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return Combination::PAIR;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function match(SortedCardSet $cards)
     {
         $cards->resetIndex();

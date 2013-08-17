@@ -14,6 +14,14 @@ class Flush extends AbstractCombination
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return Combination::FLUSH;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function match(SortedCardSet $cards)
     {
         $cards->resetIndex();

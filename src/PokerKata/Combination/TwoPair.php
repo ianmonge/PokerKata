@@ -14,6 +14,14 @@ class TwoPair extends AbstractCombination
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return Combination::TWO_PAIR;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function match(SortedCardSet $cards)
     {
         $cards->resetIndex();

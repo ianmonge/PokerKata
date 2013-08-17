@@ -26,6 +26,13 @@ abstract class AbstractCombination
     abstract public function match(SortedCardSet $cards);
 
     /**
+     * Return the combination name.
+     *
+     * @return string
+     */
+    abstract public function getName();
+
+    /**
      * Return the index.
      *
      * @return array
